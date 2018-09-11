@@ -1,7 +1,7 @@
 
 body{
     font-family: "Helvetica","Roboto",sans-serif;
-    
+    ma
 }
 
 
@@ -9,12 +9,12 @@ body{
 
 
 .nav{
-    margin-left:-8px;
-    margin-top: -22px;
-    max-width: 25%;
-    min-width:140px;
-    height: 1020px;/* Full heigt maken, zodat hij flexibel wordt*/
-    background-color: white;
+    height: 100%;
+    width: 200px;
+    position: fixed!important;
+    z-index: 1;
+    overflow: auto;
+    background-color: red;
 }
 
 .nav h1{
@@ -27,5 +27,6 @@ body{
 .main{
     max-width:75%;
     height: 200px;
+
     background-image: linear-gradient(to bottom right, #56D371, #3ADDE0);
 }
