@@ -9,7 +9,11 @@ sense.rotation = 180
 pygame.init()
 
 x = datetime.datetime.now()
+currentTime = x.strftime("%H")+x.strftime("%M")
+wakeTime = 12:50
 
-pygame.mixer.music.load('alarm.mp3')
-pygame.mixer.music.play(1)
-print("Current time:", x.strftime("%H"), ":" ,x.strftime("%M"))
+while wakeTime = currentTime:
+	pygame.mixer.music.load('alarm.mp3')
+	pygame.mixer.music.play(1)
+
+print(currentTime)
