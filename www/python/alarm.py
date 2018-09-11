@@ -1,6 +1,6 @@
 from sense_hat import SenseHat
 import datetime
-import common.py
+import common
 import pygame
 
 # Initiate the sensehat and the 'sound engine'
