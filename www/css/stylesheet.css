@@ -1,7 +1,7 @@
 
 body{
     font-family: "Helvetica","Roboto",sans-serif;
-    ma
+
 }
 
 
@@ -10,23 +10,36 @@ body{
 
 .nav{
     height: 100%;
-    width: 200px;
+    width: 20%;
     position: fixed!important;
     z-index: 1;
     overflow: auto;
-    background-color: red;
+    background-color: grey;
+    margin-top: -22px;
+    margin-left: -8px;
+    padding-bottom: 35px;
+    text-align: center;
+
 }
 
 .nav h1{
     padding-top: 50px;
     color: black;
-    text-align: center;
     
 }
 
+.nav ul{
+    list-style: none;
+
+
+}
+
+
 .main{
-    max-width:75%;
-    height: 200px;
+    margin-top: -22px;
+    margin-right: -7px;
+    padding-bottom:35px;/*/bottom en right fixen/*/
+    height: 1080px;
 
     background-image: linear-gradient(to bottom right, #56D371, #3ADDE0);
 }
