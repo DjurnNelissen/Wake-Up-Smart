@@ -1,1 +1,31 @@
-/* link naar: css/stylesheet.css */
+
+body{
+    font-family: "Helvetica","Roboto",sans-serif;
+    
+}
+
+
+
+
+
+.nav{
+    margin-left:-8px;
+    margin-top: -22px;
+    max-width: 25%;
+    min-width:140px;
+    height: 1020px;/* Full heigt maken, zodat hij flexibel wordt*/
+    background-color: white;
+}
+
+.nav h1{
+    padding-top: 50px;
+    color: black;
+    text-align: center;
+    
+}
+
+.main{
+    max-width:75%;
+    height: 200px;
+    background-image: linear-gradient(to bottom right, #56D371, #3ADDE0);
+}
