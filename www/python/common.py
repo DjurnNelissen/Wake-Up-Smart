@@ -19,12 +19,15 @@ class common:
         'user': 'ghostwolf',
         'password': '',
         'host': 'localhost',
-        'database': 'SmartWake',
+        'database': 'SenseHatData',
         'raise_on_warnings': True
     }
 
     #location variables
     Windesheim_OV_location = "zwolle_hogeschool-windesheim-loc-campus"
+
+    def __init__(self):
+        self.connect_to_database()
 
     #updates the settings used to connect to the database
     def set_database_settings(self, settings):
@@ -36,14 +39,20 @@ class common:
         #checks if there is an database connection
         self.check_database_connection()
         #creates an sql string
-        sql = "SELECT * FROM settings"
+        sql = "SELECT setting, value FROM settings"
         #executes the sql string
         err = self.execute_sql(sql)
         if err:
             return err
         #fetches the result from the sql
         val = self.cursor.fetchall()
-        return val
+        encoded = [[s.encode('utf8') for s in t] for t in val]
+        result = {}
+
+        for k,v in encoded:
+            result[k] = v
+
+        return result
 
     def check_database_connection(self):
         #checks of there is an database connection
@@ -60,7 +69,6 @@ class common:
         if err:
             return err
         val = self.cursor.fetchone()
-
         return val
 
     #connects the common module to the database
@@ -74,7 +82,7 @@ class common:
                 return "Database does not exist"
             else:
                 return ("Error: {}".format(err))
-
+        self.mariadb_connection.text_factory = str
         self.cursor = self.mariadb_connection.cursor()
 
 
@@ -83,9 +91,10 @@ class common:
         return self.get_data(self.Windesheim_API + "Klas/%s/les" % klas)
 
     #gets json from a page, used for interacting with API's
-    def get_data(self, link, *data):
+    def get_data(self, link, **data):
         if data:
-            for k,v in data.items():
+
+            for k,v in data['data'].items():
                 link += k + '=' + str(v) + "&"
 
             link = link[:-1]
@@ -103,7 +112,7 @@ class common:
     def get_schoolStartTime(self, date):
         rooster = self.get_rooster(self.get_setting_value('klas'))
         todays_classes = []
-
+        date = date.strftime("%Y-%m-%dT00:00:00Z")
         for l in rooster:
             #loop over all classes in semester
             if l['roosterdatum'] == date:
@@ -111,10 +120,10 @@ class common:
                 todays_classes.append(l)
 
         #order classes by date
-        todays_classes = sorted(todays_classes, key=lambda lesson: lesson['roosterdatum'])
+        todays_classes = sorted(todays_classes, key=lambda lesson: lesson['starttijd'])
         #return earliest date
         if todays_classes[0]:
-            return todays_classes[0].date
+            return todays_classes[0]['starttijd']
         #returns none if there are no classes on the day
         return None
 
@@ -122,6 +131,11 @@ class common:
     def get_OV_departureTime(self):
         link = self.OV_API + "/journeys?"
         sett = self.get_settings()
+        t = self.get_schoolStartTime(datetime.datetime.now())
+        t = str(t)
+        t = t[:-3]
+        t = datetime.datetime.fromtimestamp(float(t)).strftime("%Y-%m-%dT%H%M")
+
         TravelSettings = {
             'before': 1,
             'sequence': 1,
@@ -132,15 +146,15 @@ class common:
             'byTrain': sett['byTrain'],
             'lang': 'nl-NL',
             'from': sett['woonplaats'],
-            'dateTime': self.get_schoolStartTime(datetime.datetime.now()), #get school start time for today
+            'dateTime': t, #get school start time for today
             'searchType': 'arrival',
             'interchangeTime': 'standard',
             'after': 5,
-            'to': Windesheim_OV_location,
+            'to': self.Windesheim_OV_location,
             'realtime': True
         }
 
-        journey = self.get_data(link,TravelSettings)
+        journey = self.get_data(link,data=TravelSettings)
         return journey['journeys'][0]['departure']
 
     #executes an SQL string, returns error if one occured else returns none
@@ -155,7 +169,7 @@ class common:
     def get_alarmTime(self):
         OV_enabled = self.get_setting_value('OV')
         if OV_enabled:
-            return self.get_OV_departureTime() - self.get_setting_value('snoozeBuffer')
+            return self.get_OV_departureTime()
 
     #updates a setting in the database, creates a new field if it doesnt exist
     def update_setting(setting, value):
