@@ -7,7 +7,7 @@ sense = SenseHat()
 pygame.init()
 
 # Load the alarm sound
-pygame.mixer.music.load('alarm.mp3')
+pygame.mixer.music.load('../resources/alarm.mp3')
 
 # Get the current time and format it to hhmm
 x = datetime.datetime.now()
