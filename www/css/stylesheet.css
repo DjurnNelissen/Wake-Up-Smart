@@ -28,9 +28,10 @@ body{
     
 }
 
-.nav ul{
-    list-style: none;
-
+.nav button{
+    border: none;
+    clear: none;
+    background-color: transparent;
 
 }
 
