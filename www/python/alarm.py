@@ -1,5 +1,5 @@
 from sense_hat import SenseHat
-import playsound
+from playsound import playsound
 import datetime
 import time
 
@@ -9,4 +9,4 @@ sense.rotation = 180
 
 x = datetime.datetime.now()
 
-print(x.strftime("%H")":"x.strftime("%M"))
+print("Current time:", x.strftime("%H"), ":" ,x.strftime("%M"))
