@@ -1,19 +1,22 @@
 from sense_hat import SenseHat
 import pygame
 import datetime
-import time
 
+# Initiate the sensehat and the 'sound engine'
 sense = SenseHat()
-sense.rotation = 180
-
 pygame.init()
 
+# Load the alarm sound
+pygame.mixer.music.load('alarm.mp3')
+
+# Get the current time and format it to hhmm
 x = datetime.datetime.now()
-currentTime = x.strftime("%H")+x.strftime("%M")
-wakeTime = 12:50
+currentTime = x.strftime("%H%M")
 
-while wakeTime = currentTime:
-	pygame.mixer.music.load('alarm.mp3')
-	pygame.mixer.music.play(1)
+# The current alarm time in hhmm
+wakeTime = "1337"
 
-print(currentTime)
+# While the current time matches the alarm time, play the alarm
+# play(1) means play once, -1 means infinitely
+while wakeTime == currentTime:
+    pygame.mixer.music.play(1)
