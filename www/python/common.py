@@ -105,9 +105,6 @@ class common:
 
         return js
 
-
-    # -------------------- PSEUDO CODE ---------------------------#
-
     #gets the first lesson of a day
     def get_schoolStartTime(self, date):
         rooster = self.get_rooster(self.get_setting_value('klas'))
@@ -167,9 +164,11 @@ class common:
 
     #calculates the time the alarm has to trigger
     def get_alarmTime(self):
+        Snooze = self.get_setting_value('snoozeBuffer')
         OV_enabled = self.get_setting_value('OV')
         if OV_enabled:
-            return self.get_OV_departureTime()
+            t = self.get_OV_departureTime() #- datetime.timedelta(minutes=int(Snooze))
+            return t
 
     #updates a setting in the database, creates a new field if it doesnt exist
     def update_setting(setting, value):
