@@ -1,5 +1,6 @@
 import mysql.connector as mariadb
 import getopt, sys
+from mysql.connector import errorcode
 
 #default database settings
 keys = {
@@ -19,20 +20,24 @@ keys = {
         'kleur_secondary': 'white'
        }
 
+mariadb_connection = None
+cursor = None
+
 settingsTableName = 'settings'
 databaseName = 'WakeUp'
+databaseUser = 'smartAlarm'
+defaultPass = "smartWake"
 
 Database_Settings = {
-    'user': 'ghostwolf',
+    'user': '',
     'password': '',
-    'host': 'localhost',
-    'database': '%s' % databaseName,
+    'host': '',
     'raise_on_warnings': True
 }
 
 def parse_arguments():
     try:
-        getopt.getopt(sys.argv[:1],'u:p:d:t:h')
+        opts, args = getopt.getopt(sys.argv[1:],'u:p:d:t:h')
     except getopt.GetoptError as err:
         print(str(err))
         sys.exit(2)
@@ -56,34 +61,63 @@ def parse_arguments():
 
 parse_arguments()
 
+
 #for database connection
-try:
+def connect_to_database(DatabaseSettings):
+    try:
     #tries to connect to your mariaDB with the given settings, The ** acts as a short cut to pass the right arguments from the
     #Database_Settings dictionary we setup earlier
-    mariadb_connection = mariadb.connect(**Database_Settings)
+        global mariadb_connection
+        mariadb_connection = mariadb.connect(**DatabaseSettings)
 # if the try statements gets an error this part is executed
-except mariadb.Error as err:
+    except mariadb.Error as err:
     #checks if the error is an access denied error
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Something is wrong with your user name or password")
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
     #checks if the error is a Database does not exist error
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
     #if an other error occured it will just dump the entire error
-    else:
-        print("Error: {}".format(err))
+        else:
+            print("Error: {}".format(err))
     #stops the program
-    sys.exit(2)
+        sys.exit(2)
 
-#creates the cursor
-cursor = mariadb_connection.cursor()
+    #creates the cursor
+    global cursor
+    cursor = mariadb_connection.cursor()
+
+def execute_sql(sql):
+    try:
+        cursor.execute(sql)
+    except mariadb.Error as err:
+        print("Error: {}".format(err))
+        sys.exit(2)
+    #if no error commit the change to the database
+    mariadb_connection.commit()
+
+connect_to_database(Database_Settings)
+
+#create new database
+sql = "CREATE DATABASE %s IF NOT EXISTS" % databaseName
+execute_sql(sql)
+
+#close current connection
+cursor.close()
+mariadb_connection.close()
+
+#connect to the new database
+Database_Settings['database'] = databaseName
+connect_to_database(Database_Settings)
+
+#add new user to who can only read/write this new database
+#sql = "CREATE USER "
 
 #creates a settings table in the database
-sql = "CREATE TABLE %s" % settingsTableName
-cursor.execute(sql)
-mariadb_connection.commit()
+sql = "CREATE TABLE %s IF NOT EXISTS" % settingsTableName
+execute_sql(sql)
 
+#add default settings to table
 for k,v in keys.items():
     sql = "INSERT INTO settings (setting, value) VALUES ('%s','%s')" % (str(k),str(v))
-    cursor.execute(sql)
-    mariadb_connection.commit()
+    execute_sql(sql)
