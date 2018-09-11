@@ -9,4 +9,5 @@ sense.rotation = 180
 
 x = datetime.datetime.now()
 
+playsound('../resources/alarm.mp3')
 print("Current time:", x.strftime("%H"), ":" ,x.strftime("%M"))
