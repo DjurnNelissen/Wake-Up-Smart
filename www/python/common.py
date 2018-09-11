@@ -1,6 +1,7 @@
 import datetime, json
 import mysql.connector as mariadb
-import urllib.request
+from mysql.connector import errorcode
+import urllib2
 
 class common:
 
@@ -18,7 +19,7 @@ class common:
         'user': 'ghostwolf',
         'password': '',
         'host': 'localhost',
-        'database': 'SmartWake'
+        'database': 'SmartWake',
         'raise_on_warnings': True
     }
 
@@ -33,9 +34,7 @@ class common:
     #returns the entire settings table from the database
     def get_settings(self):
         #checks if there is an database connection
-        if not self.mariadb_connection or not self.cursor:
-            #if not  it creates a database connection
-            self.connect_to_database()
+        self.check_database_connection()
         #creates an sql string
         sql = "SELECT * FROM settings"
         #executes the sql string
@@ -46,13 +45,17 @@ class common:
         val = self.cursor.fetchall()
         return val
 
-    #gets the value of a setting from the database
-    def get_setting_value(self, setting):
+    def check_database_connection(self):
         #checks of there is an database connection
-        if not self.mariadb_connection or not self.cursor:
+        if self.mariadb_connection == None or self.cursor == None:
             self.connect_to_database()
 
-        sql = "SELECT value FROM settings WHERE setting=%s" % setting
+    #gets the value of a setting from the database
+    def get_setting_value(self, setting):
+        self.check_database_connection()
+
+        sql = "SELECT value FROM settings WHERE setting='%s'" % setting
+
         err = self.execute_sql(sql)
         if err:
             return err
@@ -70,23 +73,25 @@ class common:
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 return "Database does not exist"
             else:
-                return ("Error: {}".format(err)
+                return ("Error: {}".format(err))
 
         self.cursor = self.mariadb_connection.cursor()
 
+
     #gets the current les rooster for a klas
     def get_rooster(self, klas):
-        return self.get_data(Windesheim_API + "Klas/%s/les" % klas)
+        return self.get_data(self.Windesheim_API + "Klas/%s/les" % klas)
 
     #gets json from a page, used for interacting with API's
-    def get_data(self, link, data):
+    def get_data(self, link, *data):
         if data:
             for k,v in data.items():
                 link += k + '=' + str(v) + "&"
 
             link = link[:-1]
 
-        contents = urllib.request.urlopen(link).read()
+
+        contents = urllib2.urlopen(link).read()
         js = json.loads(contents.decode('utf-8'))
 
         return js
@@ -98,14 +103,15 @@ class common:
     def get_schoolStartTime(self, date):
         rooster = self.get_rooster(self.get_setting_value('klas'))
         todays_classes = []
+
         for l in rooster:
             #loop over all classes in semester
-            if l.date == date:
+            if l['roosterdatum'] == date:
                 #match all classes on the  day
                 todays_classes.append(l)
 
         #order classes by date
-        todays_classes = sorted(todays_classes, key=lambda lesson: lesson.date)
+        todays_classes = sorted(todays_classes, key=lambda lesson: lesson['roosterdatum'])
         #return earliest date
         if todays_classes[0]:
             return todays_classes[0].date
@@ -114,7 +120,7 @@ class common:
 
     #get the time you have to leave for travel with OV
     def get_OV_departureTime(self):
-        link = OV_API + "/journeys?"
+        link = self.OV_API + "/journeys?"
         sett = self.get_settings()
         TravelSettings = {
             'before': 1,
