@@ -129,18 +129,14 @@ def getColors():
     x = convertHexToRGB(c.get_setting_value('kleur_secondary'))
 
 def convertHexToRGB (rgb):
-    print(rgb)
     h = rgb.lstrip('#')
     return tuple(int(h[i:i+2], 16) for i in (0, 2 ,4))
 
-getColors()
 try:
     while True:
         getColors()
         now = datetime.datetime.now()
         update_clock(now.hour, now.minute*1.0)
-        time.sleep(10)
+        time.sleep(5)
 except KeyboardInterrupt:
-
-
     sense.clear()
