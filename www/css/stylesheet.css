@@ -1,46 +1,38 @@
-
-body{
-    font-family: "Helvetica","Roboto",sans-serif;
-
+body {
+	background-color: #3D9970;
 }
 
-
-
-
-
-.nav{
-    height: 100%;
-    width: 20%;
-    position: fixed!important;
-    z-index: 1;
-    overflow: auto;
-    background-color: grey;
-    margin-top: -22px;
-    margin-left: -8px;
-    padding-bottom: 35px;
-    text-align: center;
-
+/* Left panel with all settings categories */
+.side-bar {
+	height: 100vh;
+	background-color: #fff;
+	box-shadow: 0 0 15px #555;
 }
 
-.nav h1{
-    padding-top: 50px;
-    color: black;
-    
+.side-bar div h1 {
+	text-align: center;
 }
 
-.nav button{
-    border: none;
-    clear: none;
-    background-color: transparent;
-
+/* Page content */
+.panel {
+	margin-top: 10%;
 }
 
+/* Modal */
 
-.main{
-    margin-top: -22px;
-    margin-right: -7px;
-    padding-bottom:35px;/*/bottom en right fixen/*/
-    height: 1080px;
 
-    background-image: linear-gradient(to bottom right, #56D371, #3ADDE0);
+/* Success button */
+.btn-success {
+	background-color: #3D9970;
+	border-color: #317758;
+}
+
+.btn-success:hover {
+	background-color: #368b66;
+	border-color: #317758;
+}
+
+.btn-success:active, .btn-success:focus, .btn-success:active:focus {
+	background-color: #398965;
+	border-color: #317758;
 }
