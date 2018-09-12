@@ -9,10 +9,29 @@ function getSettings() {
     if (this.readyState == 4 && this.status == 200) {
       set = JSON.parse(this.responseText)
       //update front-end with the new parsed settings
+
+
+      //user settings
       setVal('firstname', set.voornaam)
       setVal('lastname', set.achternaam)
       setVal('straat', set.straat)
       setVal('huisnummer', set.huisnummer)
+      setVal('postcode', set.postcode)
+      setVal('woonplaats', set.woonplaats)
+      setVal('klas', set.klas)
+
+      //vervoer settings
+      setVal('Bus', set.byBus)
+      setVal('Tram', set.byTram)
+      setVal('Trein', set.byTrain)
+      setVal('Veerboot', set.byFerry)
+      setVal('Metro', set.bySubway)
+
+      //alar settings
+      setVal('Uurkleur', set.kleur_primary)
+      setVal('Minuutkleur', set.kleur_secondary)
+      setVal('Alarmvolume', set.alarmVolume)
+      setVal('Extrawektijd', set.snoozeBuffer)
     }
   }
 

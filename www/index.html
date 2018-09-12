@@ -102,7 +102,7 @@
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-success" >Opslaan</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="getSettings()">Annuleren</button>
 								</div>
 
 							</div><!-- .modal-content -->
@@ -124,27 +124,25 @@
                                   <form
                                     method="get">
                                       Vervoersmiddel(len):<br>
-                                    <input id="Lopend" type="checkbox" name="vehicle" value="Bike"> Lopend<br>
-                                    <input id="Fiets" type="checkbox" name="vehicle"
-                                    value="Bike" > Fiets<br>
-                                    <input id="Auto" type="checkbox" name="vehicle" value="Car" > Auto<br>
-                                    <input id="OV" type="checkbox" name="vehicle"
-                                    value="Car" > OV<br>
-                                      &nbsp;&nbsp; <input id="Bus" type="checkbox" name="vehicle"                 value="Bus">Bus<br>
-                                      &nbsp;&nbsp; <input id="Trein" type="checkbox" name="vehicle"
+                                    <input id="Lopend" type="radio" name="vehicle" value="Walking"> Lopend<br>
+                                    <input id="Fiets" type="radio" name="vehicle"value="Bike" > Fiets<br>
+                                    <input id="Auto" type="radio" name="vehicle" value="Car" > Auto<br>
+                                    <input id="OV" type="radio" name="vehicle" value="OV" checked > OV<br>
+                                      &nbsp;&nbsp; <input id="Bus" type="checkbox" name="OVBus"                 value="Bus">Bus<br>
+                                      &nbsp;&nbsp; <input id="Trein" type="checkbox" name="OVTrein"
                                       value="Train">Trein<br>
-                                      &nbsp; &nbsp;<input id="Tram" type="checkbox" name="vehicle"
+                                      &nbsp; &nbsp;<input id="Tram" type="checkbox" name="OVTram"
                                                 value="Tram">Tram<br>
-                                      &nbsp; &nbsp;<input id="Metro" type="checkbox" name="vehicle"
+                                      &nbsp; &nbsp;<input id="Metro" type="checkbox" name="OVMetro"
                                                 value="Subway">Metro<br>
-                                      &nbsp;&nbsp; <input id="Veerboot" type="checkbox" name="vehicle"
+                                      &nbsp;&nbsp; <input id="Veerboot" type="checkbox" name="OVVeerboot"
                                                 value="Ferry">Veerboot<br>
                                   </form>
 								</div>
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-success" >Opslaan</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="getSettings()">Annuleren</button>
 								</div>
 
 							</div><!-- .modal-content -->
@@ -172,7 +170,7 @@
                                         <input id="Alarmvolume" type="range" max="100" min="0"><br><br>
                                     Extra wektijd:<br>
                                         <input id="Extrawektijd"
-                                        type="text">&nbsp;minuten
+                                        type="number">&nbsp;minuten
 
 
                                     </form>
@@ -180,7 +178,7 @@
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-success" >Opslaan</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="getSettings()">Annuleren</button>
 								</div>
 
 							</div><!-- .modal-content -->
@@ -205,7 +203,7 @@
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-success" >Opslaan</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="getSettings()">Annuleren</button>
 								</div>
 
 							</div><!-- .modal-content -->
