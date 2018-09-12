@@ -22,7 +22,7 @@ keys = {
         'achternaam': '',
         'geslacht': '',
         'adres': '',
-        'huisnummmer': '',
+        'huisnummer': '',
         'postcode': '',
         'straat': ''
        }

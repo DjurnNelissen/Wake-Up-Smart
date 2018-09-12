@@ -9,8 +9,10 @@ function getSettings() {
     if (this.readyState == 4 && this.status == 200) {
       set = JSON.parse(this.responseText)
       //update front-end with the new parsed settings
-      console.log(set)
       setVal('firstname', set.voornaam)
+      setVal('lastname', set.achternaam)
+      setVal('straat', set.straat)
+      setVal('huisnummer', set.huisnummer)
     }
   }
 
