@@ -191,3 +191,8 @@ class common:
             return err
         #else it returns none
         return None
+
+    def set_API_cooldown(self, cd):
+        if cd < 2:
+            cd = 2
+        self.Windesheim_API_cooldown = cd

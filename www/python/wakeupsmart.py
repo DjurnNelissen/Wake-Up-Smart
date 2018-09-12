@@ -1,6 +1,7 @@
 from sense_hat import SenseHat
 import datetime
 import time
+import common
 
 sense = SenseHat()
 sense.rotation = 180
@@ -8,6 +9,7 @@ sense.low_light = True
 time.sleep(2)
 sense.low_light = False
 
+c = common.common()
 
 # unit: 60/29
 u = 60.0/29
@@ -120,8 +122,14 @@ def update_clock(hh, mm):
 
     sense.set_pixels(img)
 
+def getColors():
+    w = c.get_setting_value('kleur_primary')
+    x = c.get_setting_value('kleur_secondary')
+
+getColors()
 try:
     while True:
+        getColors()
         now = datetime.datetime.now()
         update_clock(now.hour, now.minute*1.0)
         time.sleep(10)

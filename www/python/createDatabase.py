@@ -18,7 +18,12 @@ keys = {
         'playlist': '',
         'kleur_primary': 'red',
         'kleur_secondary': 'white',
-        'alarmTijd': ''
+        'alarmTijd': '',
+        'achternaam': '',
+        'geslacht': '',
+        'adres': '',
+        'huisnummmer': '',
+        'postcode': ''
        }
 
 mariadb_connection = None
@@ -115,7 +120,11 @@ Database_Settings['database'] = databaseName
 connect_to_database(Database_Settings)
 
 #add new user to who can only read/write this new database
-#sql = "CREATE USER "
+sql = "CREATE USER %s" % databaseUser
+execute_sql(sql)
+
+#set permissions for the new user
+sql = "SETUSER '%s' GRANT EXECUTE ON %s" % (databaseUser, settingsTableName)
 
 #creates a settings table in the database
 sql = "CREATE TABLE %s (ID int NOT NULL AUTO_INCREMENT, setting VARCHAR(255), value VARCHAR(255), PRIMARY KEY (ID))" % settingsTableName
