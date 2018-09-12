@@ -1,4 +1,4 @@
-import datetime, json
+import datetime, json, time
 import mysql.connector as mariadb
 from mysql.connector import errorcode
 import urllib2
@@ -9,6 +9,9 @@ class common:
     OV_API = 'https://api.9292.nl/0.1'
     Google_API = "http://maps.googleapis.com/maps/api/distancematrix/json?"
     Windesheim_API = "http://roosterplusprod.cloudapp.net/api/"
+
+    Windesheim_API_cooldown = 10 #ensures x seconds between each API call, from this instance
+    Last_Windesheim_API_call = 0
 
     #variables
     mariadb_connection = None
@@ -88,6 +91,12 @@ class common:
 
     #gets the current les rooster for a klas
     def get_rooster(self, klas):
+        t = time.time()
+        #ensures that x seconds have passed since last api call
+        if not t >= self.Last_Windesheim_API_call + self.Windesheim_API_cooldown:
+            #if not wait till x secods have actually passed
+            time.sleep(self.Last_Windesheim_API_call + self.Windesheim_API_cooldown - t)
+        self.Last_Windesheim_API_call = time.time()
         return self.get_data(self.Windesheim_API + "Klas/%s/les" % klas)
 
     #gets json from a page, used for interacting with API's
@@ -168,6 +177,7 @@ class common:
         OV_enabled = self.get_setting_value('OV')
         if OV_enabled:
             t = self.get_OV_departureTime() #- datetime.timedelta(minutes=int(Snooze))
+            self.update_setting('alarmTijd',t)
             return t
 
     #updates a setting in the database, creates a new field if it doesnt exist

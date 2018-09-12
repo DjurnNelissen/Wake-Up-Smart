@@ -17,7 +17,8 @@ keys = {
         'alarmVolume': 100,
         'playlist': '',
         'kleur_primary': 'red',
-        'kleur_secondary': 'white'
+        'kleur_secondary': 'white',
+        'alarmTijd': ''
        }
 
 mariadb_connection = None
