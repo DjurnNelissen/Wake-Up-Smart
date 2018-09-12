@@ -29,6 +29,7 @@ class common:
     #location variables
     Windesheim_OV_location = "zwolle_hogeschool-windesheim-loc-campus"
 
+    #creates database connection upon creation
     def __init__(self):
         self.connect_to_database()
 
@@ -102,14 +103,14 @@ class common:
     #gets json from a page, used for interacting with API's
     def get_data(self, link, **data):
         if data:
-
+            #adds each data item to the end of the link as a query
             for k,v in data['data'].items():
                 link += k + '=' + str(v) + "&"
-
+            #removes the last '&' thats left over
             link = link[:-1]
 
-
         contents = urllib2.urlopen(link).read()
+        #returns the result in JSON format
         js = json.loads(contents.decode('utf-8'))
 
         return js
@@ -177,7 +178,7 @@ class common:
         OV_enabled = self.get_setting_value('OV')
         if OV_enabled:
             t = self.get_OV_departureTime() #- datetime.timedelta(minutes=int(Snooze))
-            self.update_setting('alarmTijd',t)
+            self.update_setting('alarmTijd',t) # adds the alarm time to the database
             return t
 
     #updates a setting in the database, creates a new field if it doesnt exist
