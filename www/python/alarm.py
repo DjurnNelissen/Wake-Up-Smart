@@ -17,6 +17,7 @@ currentTime = x.strftime("%H%M")
 
 # The current alarm time in hhmm
 alarmTime = c.get_alarmTime()
+print("alarmTime")
 
 # While the current time matches the alarm time, play the alarm
 # play(1) means play once, -1 means infinitely
