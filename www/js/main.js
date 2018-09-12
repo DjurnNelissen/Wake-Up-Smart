@@ -10,7 +10,6 @@ function getSettings() {
       set = JSON.parse(this.responseText)
       //update front-end with the new parsed settings
 
-
       //user settings
       setVal('firstname', set.voornaam)
       setVal('lastname', set.achternaam)
