@@ -21,11 +21,11 @@ function getSettings() {
       setVal('klas', set.klas)
 
       //vervoer settings
-      setVal('Bus', set.byBus)
-      setVal('Tram', set.byTram)
-      setVal('Trein', set.byTrain)
-      setVal('Veerboot', set.byFerry)
-      setVal('Metro', set.bySubway)
+      setCheckVal('Bus', set.byBus)
+      setCheckVal('Tram', set.byTram)
+      setCheckVal('Trein', set.byTrain)
+      setCheckVal('Veerboot', set.byFerry)
+      setCheckVal('Metro', set.bySubway)
 
       //alar settings
       setVal('Uurkleur', set.kleur_primary)
@@ -42,6 +42,10 @@ function getSettings() {
 
 function setVal (el, val) {
     document.getElementById(el).value = val
+}
+
+function setCheckVal(el, val) {
+  document.getElementById(el).checked = val
 }
 
 function getVal (el) {
