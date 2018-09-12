@@ -16,8 +16,8 @@ keys = {
         'voornaam': '',
         'alarmVolume': 100,
         'playlist': '',
-        'kleur_primary': 'red',
-        'kleur_secondary': 'white',
+        'kleur_primary': '#4286f4',
+        'kleur_secondary': '#26a83c',
         'alarmTijd': '',
         'achternaam': '',
         'geslacht': '',
@@ -70,7 +70,6 @@ def parse_arguments():
 
 parse_arguments()
 
-
 #for database connection
 def connect_to_database(DatabaseSettings):
     try:
@@ -97,11 +96,12 @@ def connect_to_database(DatabaseSettings):
     cursor = mariadb_connection.cursor()
 
 def execute_sql(sql):
+    print(sql)
     try:
         cursor.execute(sql)
     except mariadb.Error as err:
         print("Error: {}".format(err))
-        sys.exit(2)
+        #sys.exit(2)
     #if no error commit the change to the database
     mariadb_connection.commit()
 
@@ -120,11 +120,12 @@ Database_Settings['database'] = databaseName
 connect_to_database(Database_Settings)
 
 #add new user to who can only read/write this new database
-sql = "CREATE USER %s" % databaseUser
+sql = "CREATE USER '%s'@'localhost'" % databaseUser
 execute_sql(sql)
 
-#set permissions for the new user
-sql = "SETUSER '%s' GRANT EXECUTE ON %s" % (databaseUser, settingsTableName)
+#grants our user PRIVILEGES
+sql = "GRANT ALL PRIVILEGES ON %s . * TO '%s'" % (databaseName, databaseUser)
+execute_sql(sql)
 
 #creates a settings table in the database
 sql = "CREATE TABLE %s (ID int NOT NULL AUTO_INCREMENT, setting VARCHAR(255), value VARCHAR(255), PRIMARY KEY (ID))" % settingsTableName

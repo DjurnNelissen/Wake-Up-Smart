@@ -123,8 +123,15 @@ def update_clock(hh, mm):
     sense.set_pixels(img)
 
 def getColors():
-    w = c.get_setting_value('kleur_primary')
-    x = c.get_setting_value('kleur_secondary')
+    global w
+    w = convertHexToRGB(c.get_setting_value('kleur_primary'))
+    global x
+    x = convertHexToRGB(c.get_setting_value('kleur_secondary'))
+
+def convertHexToRGB (rgb):
+    print(rgb)
+    h = rgb.lstrip('#')
+    return tuple(int(h[i:i+2], 16) for i in (0, 2 ,4))
 
 getColors()
 try:

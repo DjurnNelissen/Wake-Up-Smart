@@ -19,11 +19,13 @@ class common:
 
     #database variables
     DB_Settings = {
-        'user': 'ghostwolf',
+        'user': 'smartAlarm',
         'password': '',
         'host': 'localhost',
-        'database': 'SenseHatData',
-        'raise_on_warnings': True
+        'database': 'WakeUp',
+        'raise_on_warnings': True,
+        'use_unicode': True,
+        'charset': "utf8"
     }
 
     #location variables
@@ -73,7 +75,8 @@ class common:
         if err:
             return err
         val = self.cursor.fetchone()
-        return val
+
+        return val[0].encode('utf8')
 
     #connects the common module to the database
     def connect_to_database(self):
@@ -87,7 +90,7 @@ class common:
             else:
                 return ("Error: {}".format(err))
         self.mariadb_connection.text_factory = str
-        self.cursor = self.mariadb_connection.cursor()
+        self.cursor = self.mariadb_connection.cursor(buffered=True)
 
 
     #gets the current les rooster for a klas
@@ -182,7 +185,7 @@ class common:
             return t
 
     #updates a setting in the database, creates a new field if it doesnt exist
-    def update_setting(setting, value):
+    def update_setting(self, setting, value):
         sql = "INSERT INTO settings (setting, value) VALUES (%s, %s) ON DUPLICATE KEY UPDATE " % (setting, value)
         #executes the sql
         err = self.execute_sql(sql)
