@@ -23,7 +23,8 @@ keys = {
         'geslacht': '',
         'adres': '',
         'huisnummmer': '',
-        'postcode': ''
+        'postcode': '',
+        'straat': ''
        }
 
 mariadb_connection = None
@@ -124,7 +125,7 @@ sql = "CREATE USER '%s'@'localhost'" % databaseUser
 execute_sql(sql)
 
 #grants our user PRIVILEGES
-sql = "GRANT ALL PRIVILEGES ON %s . * TO '%s'" % (databaseName, databaseUser)
+sql = "GRANT ALL PRIVILEGES ON %s . * TO '%s'@'localhost'" % (databaseName, databaseUser)
 execute_sql(sql)
 
 #creates a settings table in the database

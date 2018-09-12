@@ -186,13 +186,14 @@ class common:
 
     #updates a setting in the database, creates a new field if it doesnt exist
     def update_setting(self, setting, value):
-        sql = "INSERT INTO settings (setting, value) VALUES (%s, %s) ON DUPLICATE KEY UPDATE " % (setting, value)
+        sql = "UPDATE settings SET value='%s' WHERE setting='%s'" % (value, setting)
         #executes the sql
         err = self.execute_sql(sql)
         if err:
             #if there is an error it will return the error
             return err
         #else it returns none
+        self.mariadb_connection.commit()
         return None
 
     def set_API_cooldown(self, cd):

@@ -7,15 +7,24 @@ function getSettings() {
   //event that gets called everytime the request status changes
   xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      settings = JSON.parse(this.responseText)
+      set = JSON.parse(this.responseText)
       //update front-end with the new parsed settings
-      console.log(settings)
+      console.log(set)
+      setVal('firstname', set.voornaam)
     }
   }
 
   //actually fires the request
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
+}
+
+function setVal (el, val) {
+    document.getElementById(el).value = val
+}
+
+function getVal (el) {
+  return document.getElementById('textbox_id').value
 }
 
 function updateSettings() {
