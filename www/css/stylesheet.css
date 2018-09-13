@@ -32,7 +32,9 @@ body {
 	border-color: #317758;
 }
 
-.btn-success:active, .btn-success:focus, .btn-success:active:focus {
+.btn-success:active,
+.btn-success:focus,
+.btn-success:active:focus {
 	background-color: #398965;
 	border-color: #317758;
 }
