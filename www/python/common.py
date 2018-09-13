@@ -132,7 +132,7 @@ class common:
         #order classes by date
         todays_classes = sorted(todays_classes, key=lambda lesson: lesson['starttijd'])
         #return earliest date
-        if todays_classes[0]:
+        if len(todays_classes) > 0:
             return todays_classes[0]['starttijd']
         #returns none if there are no classes on the day
         return None
@@ -142,6 +142,8 @@ class common:
         link = self.OV_API + "/journeys?"
         sett = self.get_settings()
         t = self.get_schoolStartTime(datetime.datetime.now())
+        if not t:
+            return None
         t = str(t)
         t = t[:-3]
         t = datetime.datetime.fromtimestamp(float(t)).strftime("%Y-%m-%dT%H%M")
