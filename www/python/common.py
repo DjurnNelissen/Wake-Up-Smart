@@ -178,11 +178,15 @@ class common:
     #calculates the time the alarm has to trigger
     def get_alarmTime(self):
         Snooze = self.get_setting_value('snoozeBuffer')
-        OV_enabled = self.get_setting_value('OV')
-        if OV_enabled:
+        v = self.get_setting_value('vervoer')
+        if v == 'OV':
             t = self.get_OV_departureTime() #- datetime.timedelta(minutes=int(Snooze))
             self.update_setting('alarmTijd',t) # adds the alarm time to the database
             return t
+
+        #needs other functions to support google distancematrix
+
+        return None
 
     #updates a setting in the database, creates a new field if it doesnt exist
     def update_setting(self, setting, value):
