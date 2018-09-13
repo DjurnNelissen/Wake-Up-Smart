@@ -14,12 +14,13 @@ body {
 }
 
 /* Page content */
-.panel {
+.page-img {
 	margin-top: 10%;
 }
 
-/* Modal */
-
+.page-img > img {
+	filter: drop-shadow(0 0 3px #303030);
+}
 
 /* Success button */
 .btn-success {
