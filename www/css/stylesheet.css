@@ -57,9 +57,12 @@ body {
 }
 
 /* Give color picker default back-ground color */
-#uurkleur,
+#uurkleur {
+	background-color: #ffffff;
+}
+
 #minuutkleur {
-	background-color: #000;
+	background-color: #ff0000;
 }
 
 /* volume output */
