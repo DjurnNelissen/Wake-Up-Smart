@@ -94,24 +94,83 @@ function setCheckVal(el, val) {
 }
 
 function getVal (el) {
-  return document.getElementById('textbox_id').value
+  return document.getElementById(el).value;
+}
+
+function getCheckVal(el) {
+  return document.getElementById(el).checked;
 }
 
 function updateSettings() {
   var xmlhttp = new XMLHttpRequest();
   var url = window.location.origin + '/api/setSettings.py'
 
+
   xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       //succes
+      alert('Updated settings')
+      getSettings() // refreshes them from database to ensure it updated
     } else if (this.status == 500) {
       //failed
       alert('Failed to update the settings...')
     }
   }
 
+ var settings = {
+   'voornaam': getVal('firstname'),
+   'achternaam': getVal('lastname'),
+   'straat': getVal('straat'),
+   'postcode': getVal('postcode'),
+   'huisnummer': getVal('huisnummer'),
+   'wooonplaats': getVal('woonplaats'),
+   'klas': getVal('klas'),
+
+   'byBus': getVal('Bus'),
+   'byTrain': getVal('Trein'),
+   'byFerr': getVal('Veerboot'),
+   'byTram': getVal('Tram'),
+   'bySubway': getVal('Metro'),
+
+   'kleur_primary': getVal('Uurkleur'),
+   'kleur_secondary': getVal('Minuutkleur'),
+   'alarmVolume': getVal('Alarmvolume'),
+   'snoozeBuffer': getVal('Extrawektijd'),
+ }
+
+ //vervoer
+ if (getCheckVal('Lopend')) {
+   settings.vervoer = 'Lopend'
+ } else if (getCheckVal('Fiets')) {
+   settings.vervoer = 'Fiets'
+ } else if (getCheckVal('Auto')) {
+   settings.vervoer = "Auto"
+ } else {
+   //defaults to OV
+   settings.vervoer = 'OV'
+ }
+
+ //gender
+ if (getCheckVal('genderM')) {
+   settings.geslacht = 'M'
+ } else if (getCheckVal('genderF')) {
+  settings.geslacht = 'F'
+ } else {
+   //defaults to other
+   settings.geslacht = 'O'
+ }
+
+ var params = '';
+
+ for(var key in Object.keys(settings)){
+   params += key + '=' + settings[key] + '&'
+}
+
+  params = params.slice(0, -1)
+
   xmlhttp.open("POST", url, true);
-  xmlhttp.send()
+  xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xmlhttp.send(params)
 
 }
 
