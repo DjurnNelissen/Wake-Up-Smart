@@ -200,3 +200,7 @@ class common:
         if cd < 2:
             cd = 2
         self.Windesheim_API_cooldown = cd
+
+    def close_database_connection (self):
+        self.cursor.close()
+        self.mariadb_connection.close()

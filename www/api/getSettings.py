@@ -11,6 +11,8 @@ import common, json
 c =  common.common()
 #get settings from the database
 settings = c.get_settings()
+
+c.close_database_connection()
 #return settings in JSON format for front-end
 print("Content-type: application/json\n")
 print(json.dumps(settings, default=str))

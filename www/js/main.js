@@ -162,7 +162,7 @@ function updateSettings() {
 
  var params = '';
 
- for(var key in Object.keys(settings)){
+ for(var key in settings) {
    params += key + '=' + settings[key] + '&'
 }
 

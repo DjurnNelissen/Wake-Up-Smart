@@ -123,10 +123,12 @@ def update_clock(hh, mm):
     sense.set_pixels(img)
 
 def getColors():
+    c.connect_to_database()
     global w
     w = convertHexToRGB(c.get_setting_value('kleur_primary'))
     global x
     x = convertHexToRGB(c.get_setting_value('kleur_secondary'))
+
 
 def convertHexToRGB (rgb):
     h = rgb.lstrip('#')
@@ -137,6 +139,7 @@ try:
         getColors()
         now = datetime.datetime.now()
         update_clock(now.hour, now.minute*1.0)
-        time.sleep(5)
+        time.sleep(3)
 except KeyboardInterrupt:
+    c.close_database_connection()
     sense.clear()
