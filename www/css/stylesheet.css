@@ -38,3 +38,30 @@ body {
 	background-color: #398965;
 	border-color: #317758;
 }
+
+/* Display form warning in correct position */
+.form-warning {
+	margin-top: 20px;
+	text-align: center;
+}
+
+/* Keep choice groups under each other */
+.radioChoice {
+	display: inline;
+}
+
+/* Move OV checkboxes a bit to the right for better lay-out */
+.checkbox-ov {
+	margin-left: 15px;
+}
+
+/* Give color picker default back-ground color */
+#uurkleur,
+#minuutkleur {
+	background-color: #000;
+}
+
+/* volume output */
+#showVolume {
+	display: inline;
+}

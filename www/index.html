@@ -53,7 +53,7 @@
 						Voorkeursinstellingen
 					</button>
 
-
+					<hr>
 
 				</div><!-- .list-group -->
 			</div><!-- .side-bar -->
@@ -75,31 +75,92 @@
 
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"><span aria-hidden="true"></span> Persoonsgegevens</h4>
+								<h4 class="modal-title">
+									<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+									Persoonsgegevens
+								</h4>
 							</div>
 
-							<div class="modal-body">
+							<div class="modal-body container-fluid">
 								<form>
-									Voornaam:<br>
-									<input type="text" name="firstname" id="firstname"><br>
-									Achternaam:<br>
-									<input type="text" name="lastname" id="lastname"><br><br>
-									Geslacht:<br>
-									<input type="radio" name="gender" value="male" id='genderM'> Man<br>
-									<input type="radio" name="gender" value="female" id="genderF"> Vrouw<br>
-									<input type="radio" name="gender" value="other" id="genderO"> Anders<br><br>
-									Adres:<br>
-									Straat <br>
-									<input type="text" name="straat" id="straat"><br>
-									Huisnummer <br>
-									<input type="text" name="huisnummer" id="huisnummer"><br>
-									Postcode <br>
-									<input type="text" name="postcode" id="postcode"><br>
-									Woonplaats <br>
-									<input type="text" name="woonplaats" id="woonplaats"><br><br>
-									Klas:<br>
-									<input type="text" name="klas" id="klas"><br>
-									*Waarschuwing: hoofdletter gevoelig!
+
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="firstname">Voornaam</label>
+											<input type="text" class="form-control" id="firstname" placeholder="Voornaam">
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="lastname">Achternaam</label>
+											<input type="text" class="form-control" id="lastname" placeholder="Achternaam">
+										</div>
+									</div>
+
+									<hr>
+
+									<div class="row">
+										<label class="col-xs-12">Geslacht</label>
+										<div class="radio col-xs-12">
+											<label>
+												<input type="radio" name="gender" id="genderM" value="male">
+												Man
+											</label>
+										</div>
+
+										<div class="radio col-xs-12">
+											<label>
+												<input type="radio" name="gender" id="genderF" value="female">
+												Vrouw
+											</label>
+										</div>
+
+										<div class="radio col-xs-12">
+											<label>
+												<input type="radio" name="gender" id="genderO" value="other">
+												Anders
+											</label>
+										</div>
+									</div>
+
+									<hr>
+
+									<div class="row">
+										<div class="form-group col-md-8">
+											<label for="straat">Straat</label>
+											<input type="text" class="form-control" id="straat" placeholder="Straat">
+										</div>
+
+										<div class="form-group col-md-4">
+											<label for="huisnummer">Huisnummer</label>
+											<input type="text" class="form-control" id="huisnummer" placeholder="Huisnummer">
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="postcode">Postcode</label>
+											<input type="text" class="form-control" id="postcode" placeholder="Postcode">
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="woonplaats">Woonplaats</label>
+											<input type="text" class="form-control" id="woonplaats" placeholder="Woonplaats">
+										</div>
+									</div>
+
+									<hr>
+
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="klas">Klascode</label>
+											<input type="text" class="form-control" id="klas" placeholder="Klas">
+										</div>
+
+										<div class="alert alert-danger form-warning col-md-5" role="alert">
+											<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+											<span class="sr-only">Waarschuwing:</span>
+											De klascode is hoofdletter gevoelig!
+										</div>
+									</div>
+
 								</form>
 							</div>
 
@@ -112,6 +173,7 @@
 
 					</div><!-- .modal-dialog -->
 				</div><!-- #cat1 -->
+
 				<div id="cat2" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 
@@ -120,21 +182,82 @@
 
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"><span aria-hidden="true"></span> Reisgegevens</h4>
+								<h4 class="modal-title">
+									<span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+									Reisgegevens
+								</h4>
 							</div>
 
 							<div class="modal-body">
 								<form method="get">
-									Vervoersmiddel(len):<br>
-									<input id="Lopend" type="radio" name="vehicle" value="Walking"> Lopend<br>
-									<input id="Fiets" type="radio" name="vehicle" value="Bike"> Fiets<br>
-									<input id="Auto" type="radio" name="vehicle" value="Car"> Auto<br>
-									<input id="OV" type="radio" name="vehicle" value="OV"> OV<br>
-									&nbsp;&nbsp; <input id="Bus" type="checkbox" name="OVBus" value="Bus">Bus<br>
-									&nbsp;&nbsp; <input id="Trein" type="checkbox" name="OVTrein" value="Train">Trein<br>
-									&nbsp; &nbsp;<input id="Tram" type="checkbox" name="OVTram" value="Tram">Tram<br>
-									&nbsp; &nbsp;<input id="Metro" type="checkbox" name="OVMetro" value="Subway">Metro<br>
-									&nbsp;&nbsp; <input id="Veerboot" type="checkbox" name="OVVeerboot" value="Ferry">Veerboot<br>
+
+									<label class="radioChoice">Vervoersmiddel(len)
+										<div class="radio choiceElse">
+											<label>
+												<input type="radio" name="vehicle" id="lopend" value="walking">
+												Lopend
+											</label>
+										</div>
+
+										<div class="radio choiceElse">
+											<label>
+												<input type="radio" name="vehicle" id="fiets" value="bike">
+												Fiets
+											</label>
+										</div>
+
+										<div class="radio choiceElse">
+											<label>
+												<input type="radio" name="vehicle" id="auto" value="car">
+												Auto
+											</label>
+										</div>
+
+										<div class="radio choiceOV">
+											<label>
+												<input type="radio" name="vehicle" id="ov" value="ov">
+												OV
+											</label>
+										</div>
+									</label>
+
+									<label class="checkbox-ov">OV opties
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="bus" value="bus" aria-label="bus" disabled>
+												Bus
+											</label>
+										</div>
+
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="trein" value="train" aria-label="trein" disabled>
+												Trein
+											</label>
+										</div>
+
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="tram" value="tram" aria-label="tram" disabled>
+												Tram
+											</label>
+										</div>
+
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="metro" value="subway" aria-label="metro" disabled>
+												Metro
+											</label>
+										</div>
+
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="veerboot" value="ferry" aria-label="veerboot" disabled>
+												Veerboot
+											</label>
+										</div>
+									</label>
+
 								</form>
 							</div>
 
@@ -147,6 +270,7 @@
 
 					</div><!-- .modal-dialog -->
 				</div><!-- #cat2 -->
+
 				<div id="cat3" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 
@@ -155,47 +279,43 @@
 
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"><span aria-hidden="true"></span> Voorkeursinstellingen</h4>
+								<h4 class="modal-title">
+									<span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+									Voorkeursinstellingen
+								</h4>
 							</div>
 
-							<div class="modal-body">
+							<div class="modal-body container-fluid">
 								<form>
-									Uurkleur:<br>
-									<input id="Uurkleur" type="color" name="firstname"><br><br>
-									Minuutkleur:<br>
-									<input id="Minuutkleur" type="color" name="lastname"><br><br>
-									Alarmvolume:<br>
-									<input id="Alarmvolume" type="range" max="100" min="0"><br><br>
-									Extra wektijd:<br>
-									<input id="Extrawektijd" type="number">&nbsp;minuten
 
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="uurkleur">Uurkleur</label>
+											<input type="color" class="form-control" id="uurkleur">
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="minuutkleur">Minuutkleur</label>
+											<input type="color" class="form-control" id="minuutkleur">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="alarmvolume">Alarmvolume <output id="showVolume">50</output></label>
+											<input type="range" class="form-control" id="alarmvolume" max="100" min="0" value="50" oninput="showVolume.value = alarmvolume.value">
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="extrawektijd">Extra wektijd</label>
+											<div class="input-group">
+												<input type="number" class="form-control" id="extrawektijd">
+												<div class="input-group-addon">minuten</div>
+											</div>
+										</div>
+									</div>
 
 								</form>
-							</div>
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-success" onclick="updateSettings()">Opslaan</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal" onclick="getSettings()">Annuleren</button>
-							</div>
-
-						</div><!-- .modal-content -->
-
-					</div><!-- .modal-dialog -->
-				</div><!-- #cat3 -->
-				<div id="cat2" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"><span aria-hidden="true"></span> Kleur instellingen</h4>
-							</div>
-
-							<div class="modal-body">
-
-
 							</div>
 
 							<div class="modal-footer">
@@ -218,6 +338,33 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="js/bootstrap.js"></script>
+
+	<script>
+		$(document).ready(function() {
+
+			//Change the background-color of the color-picker
+			$("#uurkleur, #minuutkleur").change(function() {
+				var clr = $(this).val();
+				$(this).css("background-color", clr);
+			});
+
+			// Listen to OV option radio button - enable OV choices when selected
+			$('.radioChoice>.choiceOV input[type=radio]').click(function() {
+				if ($(this).is(':checked')) {
+					$('#bus, #trein, #tram, #metro, #veerboot').prop('disabled', false);
+				}
+			});
+
+			// Listen to all other radio buttons - disable OV choices again when selected
+			$('.radioChoice>.choiceElse input[type=radio]').click(function() {
+				if ($(this).is(':checked')) {
+					$('#bus, #trein, #tram, #metro, #veerboot').prop('disabled', true);
+				}
+			});
+
+		});
+
+	</script>
 </body>
 
 </html>
