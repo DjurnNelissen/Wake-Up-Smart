@@ -24,7 +24,8 @@ keys = {
         'adres': '',
         'huisnummer': '',
         'postcode': '',
-        'straat': ''
+        'straat': '',
+        'vervoer': 'OV'
        }
 
 mariadb_connection = None

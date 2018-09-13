@@ -31,6 +31,52 @@ function getSettings() {
       setVal('Minuutkleur', set.kleur_secondary)
       setVal('Alarmvolume', set.alarmVolume)
       setVal('Extrawektijd', set.snoozeBuffer)
+
+      //radio buttons
+      switch (set.geslacht) {
+        case 'M':
+          setCheckVal('genderM', true)
+          setCheckVal('genderF', false)
+          setCheckVal('genderO', false)
+          break;
+        case 'F':
+          setCheckVal('genderF', true)
+          setCheckVal('genderM', false)
+          setCheckVal('genderO', false)
+          break;
+        default:
+          setCheckVal('genderO', true)
+          setCheckVal('genderM', false)
+          setCheckVal('genderF', false)
+      }
+
+      switch (set.vervoer) {
+        case 'OV':
+          setCheckVal('OV', true)
+          setCheckVal('Lopend', false)
+          setCheckVal('Fiets', false)
+          setCheckVal('Auto', false)
+          break;
+        case 'Lopend':
+          setCheckVal('Lopend', true)
+          setCheckVal('OV', false)
+          setCheckVal('Fiets', false)
+          setCheckVal('Auto', false)
+          break;
+        case 'Fiets':
+          setCheckVal('Fiets', true)
+          setCheckVal('Lopend', false)
+          setCheckVal('OV', false)
+          setCheckVal('Auto', false)
+          break;
+        case 'Auto':
+          setCheckVal('Auto', true)
+          setCheckVal('Lopend', false)
+          setCheckVal('Fiets', false)
+          setCheckVal('OV', false)
+          break;
+
+      }
     }
   }
 
