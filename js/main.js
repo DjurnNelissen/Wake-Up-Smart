@@ -20,17 +20,17 @@ function getSettings() {
       setVal('klas', set.klas)
 
       //vervoer settings
-      setCheckVal('Bus', set.byBus)
-      setCheckVal('Tram', set.byTram)
-      setCheckVal('Trein', set.byTrain)
-      setCheckVal('Veerboot', set.byFerry)
-      setCheckVal('Metro', set.bySubway)
+      setCheckVal('bus', set.byBus)
+      setCheckVal('tram', set.byTram)
+      setCheckVal('trein', set.byTrain)
+      setCheckVal('veerboot', set.byFerry)
+      setCheckVal('metro', set.bySubway)
 
       //alar settings
-      setVal('Uurkleur', set.kleur_primary)
-      setVal('Minuutkleur', set.kleur_secondary)
-      setVal('Alarmvolume', set.alarmVolume)
-      setVal('Extrawektijd', set.snoozeBuffer)
+      setVal('uurkleur', set.kleur_primary)
+      setVal('minuutkleur', set.kleur_secondary)
+      setVal('alarmvolume', set.alarmVolume)
+      setVal('extrawektijd', set.snoozeBuffer)
 
       //radio buttons
       switch (set.geslacht) {
@@ -52,28 +52,28 @@ function getSettings() {
 
       switch (set.vervoer) {
         case 'OV':
-          setCheckVal('OV', true)
-          setCheckVal('Lopend', false)
-          setCheckVal('Fiets', false)
-          setCheckVal('Auto', false)
+          setCheckVal('ov', true)
+          setCheckVal('lopend', false)
+          setCheckVal('fiets', false)
+          setCheckVal('auto', false)
           break;
         case 'Lopend':
-          setCheckVal('Lopend', true)
-          setCheckVal('OV', false)
-          setCheckVal('Fiets', false)
-          setCheckVal('Auto', false)
+          setCheckVal('lopend', true)
+          setCheckVal('ov', false)
+          setCheckVal('fiets', false)
+          setCheckVal('auto', false)
           break;
         case 'Fiets':
-          setCheckVal('Fiets', true)
-          setCheckVal('Lopend', false)
-          setCheckVal('OV', false)
-          setCheckVal('Auto', false)
+          setCheckVal('fiets', true)
+          setCheckVal('lopend', false)
+          setCheckVal('ov', false)
+          setCheckVal('auto', false)
           break;
         case 'Auto':
-          setCheckVal('Auto', true)
-          setCheckVal('Lopend', false)
-          setCheckVal('Fiets', false)
-          setCheckVal('OV', false)
+          setCheckVal('auto', true)
+          setCheckVal('lopend', false)
+          setCheckVal('fiets', false)
+          setCheckVal('ov', false)
           break;
 
       }
@@ -126,25 +126,25 @@ function updateSettings() {
    'wooonplaats': getVal('woonplaats'),
    'klas': getVal('klas'),
 
-   'byBus': getVal('Bus'),
-   'byTrain': getVal('Trein'),
-   'byFerr': getVal('Veerboot'),
-   'byTram': getVal('Tram'),
-   'bySubway': getVal('Metro'),
+   'byBus': getCheckVal('bus'),
+   'byTrain': getCheckVal('trein'),
+   'byFerry': getCheckVal('veerboot'),
+   'byTram': getCheckVal('tram'),
+   'bySubway': getCheckVal('metro'),
 
-   'kleur_primary': getVal('Uurkleur'),
-   'kleur_secondary': getVal('Minuutkleur'),
-   'alarmVolume': getVal('Alarmvolume'),
-   'snoozeBuffer': getVal('Extrawektijd'),
+   'kleur_primary': getVal('uurkleur'),
+   'kleur_secondary': getVal('minuutkleur'),
+   'alarmVolume': getVal('alarmvolume'),
+   'snoozeBuffer': getVal('extrawektijd')
  }
 
  //vervoer
- if (getCheckVal('Lopend')) {
-   settings.vervoer = 'Lopend'
- } else if (getCheckVal('Fiets')) {
-   settings.vervoer = 'Fiets'
- } else if (getCheckVal('Auto')) {
-   settings.vervoer = "Auto"
+ if (getCheckVal('lopend')) {
+   settings.vervoer = 'lopend'
+ } else if (getCheckVal('fiets')) {
+   settings.vervoer = 'fiets'
+ } else if (getCheckVal('auto')) {
+   settings.vervoer = "auto"
  } else {
    //defaults to OV
    settings.vervoer = 'OV'
