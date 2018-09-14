@@ -308,7 +308,7 @@
 										<!-- Test alarm button -->
 										<div class="form-group col-md-1 alarm-test">
 											<label for="alarmTest">Test</label>
-											<button type="button" class="btn btn-success" id="alarmTest">
+											<button type="button" class="btn btn-success" id="alarmTest" onclick="">
 												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
 											</button>
 										</div>
@@ -367,6 +367,13 @@
 				if ($(this).is(':checked')) {
 					$('#bus, #trein, #tram, #metro, #veerboot').prop('disabled', true);
 				}
+			});
+
+			// HTTP request for test alarm
+			$('.alarm-test>button').click(function() {
+				$.ajax(window.location.origin + '/api/testAlarm.py', {
+					type: 'GET'
+				})
 			});
 
 		});
