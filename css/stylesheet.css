@@ -65,7 +65,13 @@ body {
 	background-color: #ff0000;
 }
 
-/* volume output */
+/* Volume output */
 #showVolume {
 	display: inline;
+}
+
+/* Test alarm button */
+.alarm-test > label,
+.alarm-test > button {
+	margin-left: -15px;
 }
