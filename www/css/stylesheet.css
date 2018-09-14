@@ -14,12 +14,13 @@ body {
 }
 
 /* Page content */
-.panel {
+.page-img {
 	margin-top: 10%;
 }
 
-/* Modal */
-
+.page-img > img {
+	filter: drop-shadow(0 0 3px #303030);
+}
 
 /* Success button */
 .btn-success {
@@ -32,7 +33,39 @@ body {
 	border-color: #317758;
 }
 
-.btn-success:active, .btn-success:focus, .btn-success:active:focus {
+.btn-success:active,
+.btn-success:focus,
+.btn-success:active:focus {
 	background-color: #398965;
 	border-color: #317758;
+}
+
+/* Display form warning in correct position */
+.form-warning {
+	margin-top: 20px;
+	text-align: center;
+}
+
+/* Keep choice groups under each other */
+.radioChoice {
+	display: inline;
+}
+
+/* Move OV checkboxes a bit to the right for better lay-out */
+.checkbox-ov {
+	margin-left: 15px;
+}
+
+/* Give color picker default back-ground color */
+#uurkleur {
+	background-color: #ffffff;
+}
+
+#minuutkleur {
+	background-color: #ff0000;
+}
+
+/* volume output */
+#showVolume {
+	display: inline;
 }
