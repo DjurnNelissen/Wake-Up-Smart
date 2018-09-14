@@ -300,9 +300,17 @@
 									</div>
 
 									<div class="row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-5">
 											<label for="alarmvolume">Alarmvolume <output id="showVolume">50</output></label>
 											<input type="range" class="form-control" id="alarmvolume" max="100" min="0" value="50" oninput="showVolume.value = alarmvolume.value">
+										</div>
+
+										<!-- Test alarm button -->
+										<div class="form-group col-md-1 alarm-test">
+											<label for="alarmTest">Test</label>
+											<button type="button" class="btn btn-success" id="alarmTest">
+												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+											</button>
 										</div>
 
 										<div class="form-group col-md-6">
