@@ -56,15 +56,6 @@ body {
 	margin-left: 15px;
 }
 
-/* Give color picker default back-ground color */
-#uurkleur {
-	background-color: #ffffff;
-}
-
-#minuutkleur {
-	background-color: #ff0000;
-}
-
 /* Volume output */
 #showVolume {
 	display: inline;
