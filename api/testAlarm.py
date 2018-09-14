@@ -3,9 +3,13 @@
 import sys
 sys.path.insert(0, '../python')
 
-import common, json, time, wave, pyaudio
+import common, json, wave, pyaudio
+from subprocess import call
 
 c = common.common()
+
+call(["amixer", "-D", "pulse", "sset", "Master", str(c.get_setting_value('alarmVolume')) + "%"])
+
 chunk = 1024
 
 p = pyaudio.PyAudio()
