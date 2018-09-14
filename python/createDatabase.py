@@ -26,7 +26,7 @@ keys = {
         'postcode': '',
         'straat': '',
         'vervoer': 'OV',
-        'alarmFile': '../resources/alarm.mp3'
+        'alarmFile': '../resources/alarm.wav'
        }
 
 mariadb_connection = None
